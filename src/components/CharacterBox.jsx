@@ -1,49 +1,34 @@
-import React from "react"; //, { useState }
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-const CharacterBox = (props) => {
-  const { filtered, onDelete, onLike } = props; // simpsons,onEdit
+const CharacterBox = () => {
+  const simpsons = useSelector((state) => state);
+  const dispatch = useDispatch();
 
-  // const [edit, setEdit] = useState(false);
-  // const [character, setCharacter] = useState("");
-
-  // const onSave = () => {
-  //   setEdit(false); //----- turn off edit
-
-  //   onEdit(simpsons.quote, character); //----- call onEdit function
-  // };
-
-  // const onEditInput = (e) => {
-  //   setCharacter(e.target.value);
-  // };
+  if (!simpsons) {
+    return <div className="lds-ripple"></div>;
+  }
 
   return (
     <>
-      {filtered.map((item) => (
+      {simpsons.simpsons.map((item) => (
         <div className="characterCard" key={item.quote}>
-          <div>
+          {/* <div>
             <button
               className="deleteButton"
-              onClick={() => onDelete(item.quote)}
+              onClick={() =>
+                dispatch({ type: "onDelete", payload: item.quote })
+              }
             >
               <i className="fa-solid fa-user-xmark"></i>
             </button>
-          </div>
+          </div> */}
 
           <div className="character">
             <p>{item.character}</p>
           </div>
 
-          {/* {edit ? (
-            <>
-              <input onInput={onEditInput} type="text" />
-              <button onClick={onSave}>Save</button>
-            </>
-          ) : (
-            <button onClick={() => setEdit(!edit)}>Edit</button>
-          )}
-          if (edit?) edit is true, show (<>to</>), otherwise (:) show.... */}
-
-          <button className="imageButton">
+          {/* <button className="imageButton">
             <img
               src={item.image}
               alt={item.character}
@@ -51,7 +36,7 @@ const CharacterBox = (props) => {
                 onLike(item.quote);
               }}
             ></img>
-          </button>
+          </button> */}
 
           <div className="quote">
             <p>{item.quote}</p>
@@ -64,5 +49,43 @@ const CharacterBox = (props) => {
 
 export default CharacterBox;
 
-//----- note!
-//----- line 12, the key is very important, it causes the delete button not working. Correct the error in console first, it might fix the bug.
+// const CharacterBox = (props) => {
+//   const { filtered, onDelete, onLike } = props;
+
+//   return (
+
+{
+  /* <>
+<div className="menuBar">
+  <div className="title">
+    <h1>The Simpsons Quote</h1>
+  </div>
+  <div className="onInput">
+    <input
+      onInput={onInput}
+      type="text"
+      placeholder="Search by name"
+    ></input>
+  </div>
+  <div className="menuButton newQuote">
+    <button onClick={newQuote}>New Quote</button>
+  </div>
+  <div className="menuButton onSortAtoZ">
+    <button onClick={onSortAtoZ}>Sort by A-Z</button>
+  </div>
+  <div className="menuButton onSortZtoA">
+    <button onClick={onSortZtoA}>Sort by Z-A</button>
+  </div>
+</div>
+
+<div className="likesBar">
+  <h2>Total Likes: {total}</h2>
+  <p>* Click image to like characters</p>
+</div>
+
+</> */
+}
+
+//
+//   );
+// };
